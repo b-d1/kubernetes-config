@@ -1,0 +1,19 @@
+apiVersion: crd.projectcalico.org/v1
+kind: GlobalNetworkPolicy
+metadata:
+  name: deny-tcp-app2
+spec:
+  selector: app == 'app2a'
+  types:
+  - Ingress
+  - Egress
+  ingress:
+  - action: Deny
+    protocol: TCP
+    source:
+      selector: app == 'app1a'
+    destination:
+      ports:
+      - 6379
+  egress:
+  - action: Allow
