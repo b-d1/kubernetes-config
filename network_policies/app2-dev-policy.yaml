@@ -1,0 +1,33 @@
+apiVersion: crd.projectcalico.org/v1
+kind: GlobalNetworkPolicy
+metadata:
+  name: app2-dev-policy
+spec:
+  selector: app == 'app2-dev'
+  types:
+  - Ingress
+  - Egress
+  ingress:
+  - action: Deny
+    protocol: TCP
+    source:
+      selector: app == 'app1-prod'
+    destination:
+      ports:
+      - 5001
+  - action: Deny
+    protocol: TCP
+    source:
+      selector: app == 'app1-test'
+    destination:
+      ports:
+        - 5001
+  - action: Allow
+    protocol: TCP
+    source:
+      selector: app == 'app1-dev'
+    destination:
+      ports:
+        - 5001
+  egress:
+  - action: Allow

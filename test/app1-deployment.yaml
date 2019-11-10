@@ -1,21 +1,21 @@
 apiVersion: apps/v1 #  for k8s versions before 1.9.0 use apps/v1beta2  and before 1.8.0 use extensions/v1beta1
 kind: Deployment
 metadata:
-  name: app2-prod
-  namespace: prod
+  name: app1-test
+  namespace: test
 spec:
   selector:
     matchLabels:
-      app: app2-prod
-  replicas: 2
+      app: app1-test
+  replicas: 3
   template:
     metadata:
       labels:
-        app: app2-prod
+        app: app1-test
     spec:
       containers:
-      - name: app2-prod
-        image: blag0j/app2
+      - name: app1-test
+        image: blag0j/app1
         resources:
           requests:
             cpu: 100m
@@ -29,4 +29,4 @@ spec:
           # line below:
           # value: env
         ports:
-        - containerPort: 5001
+        - containerPort: 5000

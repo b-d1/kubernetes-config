@@ -1,20 +1,20 @@
 apiVersion: apps/v1 #  for k8s versions before 1.9.0 use apps/v1beta2  and before 1.8.0 use extensions/v1beta1
 kind: Deployment
 metadata:
-  name: app2-prod
-  namespace: prod
+  name: app2-dev
+  namespace: dev
 spec:
   selector:
     matchLabels:
-      app: app2-prod
+      app: app2-dev
   replicas: 2
   template:
     metadata:
       labels:
-        app: app2-prod
+        app: app2-dev
     spec:
       containers:
-      - name: app2-prod
+      - name: app2-dev
         image: blag0j/app2
         resources:
           requests:
